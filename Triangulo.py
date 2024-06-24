@@ -4,31 +4,37 @@ from tkinter import messagebox
 
 def converter():
     try:
-        base = float(entry_base.get())
-        altura = float(entry_altura.get())
-        cateto = ((base ** 2) + (altura ** 2))
-        c3 = cateto ** 0.5
-        label_result.config(text=f"{c3:.2f} cateto3")
+        catajacente = float(entry_catajacente.get())
+        catoposto = float(entry_catoposto.get())
+
+        if catajacente <= 0 or catoposto <= 0:
+            messagebox.showerror('Erro', 'Os valores devem ser positivos')
+            return
+
+        hipotenusa = ((catajacente ** 2) + (catoposto ** 2)) ** 0.5
+        label_result.config(text=f"Resultado hipotenusa: {hipotenusa:.2f}")
     except ValueError:
         messagebox.showerror("Erro", "Por favor, insira um número válido.")
 
 
 # Criação da janela principal
+
 root = tk.Tk()
-root.title("Calculo do Triangulo")
+
+root.title("Calculo da Hipotenusa")
 
 # Criação dos widgets
-label_base = tk.Label(root, text="Insira a base abaixo:")
-label_base.pack(pady=10)
+label_catajacente = tk.Label(root, text="Insira a base: ")
+label_catajacente.pack(pady=10)
 
-entry_base = tk.Entry(root)
-entry_base.pack(pady=5)
+entry_catajacente = tk.Entry(root)
+entry_catajacente.pack(pady=5)
 
-label_altura = tk.Label(root, text="Insira a Altura abaixo")
-label_altura.pack(pady=10)
+label_catoposto = tk.Label(root, text="Insira a Altura: ")
+label_catoposto.pack(pady=10)
 
-entry_altura = tk.Entry(root)
-entry_altura.pack(pady=5)
+entry_catoposto = tk.Entry(root)
+entry_catoposto.pack(pady=5)
 
 button_convert = tk.Button(root, text="Calcular", command=converter)
 button_convert.pack(pady=10)
